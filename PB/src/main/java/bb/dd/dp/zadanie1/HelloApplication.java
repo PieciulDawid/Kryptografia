@@ -1,4 +1,4 @@
-package com.example.zadanie1;
+package bb.dd.dp.zadanie1;
 
 import javafx.application.Application;
 import javafx.scene.Group;

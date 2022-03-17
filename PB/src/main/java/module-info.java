@@ -1,8 +1,9 @@
-module com.example.zadanie1 {
+module bb.dd.dp.zadanie1 {
     requires javafx.controls;
     requires javafx.fxml;
+    requires org.apache.commons.lang3;
+    requires com.google.common;
 
-
-    opens com.example.zadanie1 to javafx.fxml;
-    exports com.example.zadanie1;
+    opens bb.dd.dp.zadanie1 to javafx.fxml;
+    exports bb.dd.dp.zadanie1;
 }
