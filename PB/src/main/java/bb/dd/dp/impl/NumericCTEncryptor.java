@@ -26,7 +26,7 @@ public class NumericCTEncryptor implements CTEncryptor<int[]> {
 		int mLen = matrix.length;
 		int m0Len = matrix[0].length;
 		
-		for (i = 0, n = 0; i < mLen && n < pLen; i++, n++) {
+		for (i = 0, n = 0; i < mLen && n < pLen; i++) {
 			for (j = 0; j < m0Len && n < pLen; j++, n++) {
 				matrix[i][j] = plainTextChars[n];
 			}
@@ -42,10 +42,11 @@ public class NumericCTEncryptor implements CTEncryptor<int[]> {
 		final char[][] transposedMatrix = new char[key.length][];
 		
 		for (i = 0; i < transposedMatrix.length; i++) {
-			transposedMatrix[i] = matrix[key[i]];
+			transposedMatrix[i] = matrix[key[i]-1];
 		}
-		
-		for (i = 0, n = 0; i < mLen && n < pLen; i++, n++) {
+
+		//FIXME tzreba zmaienić wiersze na kolumny. Obecnie Builder bierze wiersze od danych indeksów a piwinien brać kolumny
+		for (i = 0, n = 0; i < mLen && n < pLen; i++) {
 			for (j = 0; j < m0Len && n < pLen; j++, n++) {
 				builder.append(transposedMatrix[i][j]);
 			}
