@@ -5,6 +5,9 @@ import bb.dd.dp.impl.RailFenceEncryptor;
 import bb.dd.dp.impl.StringCTEncryptor;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
+import javafx.util.Duration;
 
 import java.util.Arrays;
 
@@ -15,7 +18,14 @@ import java.util.Arrays;
 public class HelloController {
 
     @FXML
-    void initialize() {}
+    void initialize() {
+        final Tooltip tooltip = new Tooltip();
+        tooltip.setText("Click to copy!");
+        tooltip.setShowDelay(new Duration(250));
+        rfOutput.setTooltip(tooltip);
+        pmOutput.setTooltip(tooltip);
+        pmsOutput.setTooltip(tooltip);
+    }
 
 
     @FXML
@@ -176,5 +186,24 @@ public class HelloController {
         }
         StringCTEncryptor stringCTEncryptor = new StringCTEncryptor(pmsKey.getText(), Integer.parseInt(pmsDepth.getText()));
         pmsOutput.setText(stringCTEncryptor.decrypt(pmsInput.getText()));
+    }
+
+    @FXML
+    public void onClickLableRf(){
+        toClipboard(rfOutput.getText());
+    }
+    @FXML
+    public void onClickLablePm(){
+        toClipboard(pmOutput.getText());
+    }
+    @FXML
+    public void onClickLablePms(){
+        toClipboard(pmsOutput.getText());
+    }
+    public void toClipboard(String clip){
+        final Clipboard clipboard = Clipboard.getSystemClipboard();
+        final ClipboardContent content = new ClipboardContent();
+        content.putString(clip);
+        clipboard.setContent(content);
     }
 }
