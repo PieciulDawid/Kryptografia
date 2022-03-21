@@ -3,13 +3,107 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="bb.dd.dp.zadanie1.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bb.dd.dp.zadanie1.HelloController">
+  <tabs>
+    <Tab text="Rail fence">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <VBox layoutX="250.0" layoutY="76.0" prefHeight="371.2" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <TextArea fx:id="rfInput" prefHeight="130.0" prefWidth="579.0" promptText="Teks jawny">
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </TextArea>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                           <children>
+                              <TextField fx:id="rfKey" promptText="1,2,3,4,5" />
+                              <Button fx:id="rfEncode" mnemonicParsing="false" text="Szyfruj" />
+                              <Button fx:id="rfDecode" mnemonicParsing="false" text="Deszyfruj" />
+                           </children>
+                        </HBox>
+                        <Separator prefWidth="200.0" />
+                        <Label fx:id="rfOutput" alignment="TOP_CENTER" minHeight="120.0" minWidth="580.0" text="Wynik">
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab text="Przestawienie macierzowe">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <VBox layoutX="250.0" layoutY="76.0" prefHeight="371.2" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <TextArea fx:id="pmInput" prefHeight="130.0" prefWidth="579.0" promptText="Teks jawny">
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </TextArea>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                           <children>
+                              <TextField fx:id="pmDepth" promptText="4" />
+                              <TextField fx:id="pmKey" promptText="1,2,3,4,5" />
+                              <Button fx:id="pmEncode" mnemonicParsing="false" text="Szyfruj" />
+                              <Button fx:id="pmDecode" mnemonicParsing="false" text="Deszyfruj" />
+                           </children>
+                        </HBox>
+                        <Separator prefWidth="200.0" />
+                        <Label fx:id="pmOutput" alignment="TOP_CENTER" minHeight="120.0" minWidth="580.0" text="Wynik">
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Przestawienie macierzowe słowo">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <VBox layoutX="250.0" layoutY="76.0" prefHeight="371.2" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <TextArea fx:id="pmsInput" prefHeight="130.0" prefWidth="579.0" promptText="Teks jawny">
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </TextArea>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                           <children>
+                              <TextField fx:id="pmsDepth" promptText="4" />
+                              <TextField fx:id="pmsKey" promptText="klucz jako słowo" />
+                              <Button fx:id="pmsEncode" mnemonicParsing="false" text="Szyfruj" />
+                              <Button fx:id="pmsDecode" mnemonicParsing="false" text="Deszyfruj" />
+                           </children>
+                        </HBox>
+                        <Separator prefWidth="200.0" />
+                        <Label fx:id="pmsOutput" alignment="TOP_CENTER" minHeight="120.0" minWidth="580.0" text="Wynik">
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+  </tabs>
+</TabPane>
