@@ -17,7 +17,9 @@ public class NumericCTEncryptor implements CTEncryptor<int[]> {
 		
 		final char[] plainTextChars = plainText.toCharArray();
 		
-		final char[] padding = RandomStringUtils.randomAlphabetic(key.length * d - plainTextChars.length).toCharArray();
+		final char[] padding = RandomStringUtils
+				.randomAlphabetic(key.length * d - plainTextChars.length)
+				.toCharArray();
 		
 		final var builder = new StringBuilder(key.length * d);
 		
@@ -26,29 +28,29 @@ public class NumericCTEncryptor implements CTEncryptor<int[]> {
 		int mLen = matrix.length;
 		int m0Len = matrix[0].length;
 		
-		for (i = 0, n = 0; i < mLen && n < pLen; i++) {
-			for (j = 0; j < m0Len && n < pLen; j++, n++) {
-				matrix[i][j] = plainTextChars[n];
+		for (i = 0, n = 0; i < m0Len && n < pLen; i++) {
+			for (j = 0; j < mLen && n < pLen; j++, n++) {
+				matrix[j][i] = plainTextChars[n];
 			}
 		}
 		
-		for (n = 0; i < mLen && n < pLen; i++, n++) {
-			for (; j < m0Len && n < pLen; j++, n++) {
-				matrix[i][j] = padding[n];
+		for (n = 0, i--; i < m0Len; i++) {
+			for (; j < mLen; j++, n++) {
+				matrix[j][i] = padding[n];
 			}
 			j = 0;
 		}
 		
 		final char[][] transposedMatrix = new char[key.length][];
 		
-		for (i = 0; i < transposedMatrix.length; i++) {
-			transposedMatrix[i] = matrix[key[i]-1];
+		for (i = 0; i < mLen; i++) {
+			transposedMatrix[i] = matrix[key[i] - 1];
 		}
-
-		//FIXME tzreba zmaienić wiersze na kolumny. Obecnie Builder bierze wiersze od danych indeksów a piwinien brać kolumny
-		for (i = 0, n = 0; i < mLen && n < pLen; i++) {
-			for (j = 0; j < m0Len && n < pLen; j++, n++) {
-				builder.append(transposedMatrix[i][j]);
+		
+		
+		for (i = 0, n = 0; i < m0Len; i++) {
+			for (j = 0; j < mLen; j++, n++) {
+				builder.append(transposedMatrix[j][i]);
 			}
 		}
 		
@@ -68,21 +70,21 @@ public class NumericCTEncryptor implements CTEncryptor<int[]> {
 		int mLen = matrix.length;
 		int m0Len = matrix[0].length;
 		
-		for (i = 0, n = 0; i < mLen && n < pLen; i++, n++) {
-			for (j = 0; j < m0Len && n < pLen; j++, n++) {
-				matrix[i][j] = cipherTextChars[n];
+		for (i = 0, n = 0; i < m0Len && n < pLen; i++) {
+			for (j = 0; j < mLen && n < pLen; j++, n++) {
+				matrix[j][i] = cipherTextChars[n];
 			}
 		}
 		
 		final char[][] transposedMatrix = new char[key.length][];
 		
 		for (i = 0; i < transposedMatrix.length; i++) {
-			transposedMatrix[key[i]] = matrix[i];
+			transposedMatrix[key[i] - 1] = matrix[i];
 		}
 		
-		for (i = 0, n = 0; i < mLen && n < pLen; i++, n++) {
-			for (j = 0; j < m0Len && n < pLen; j++, n++) {
-				builder.append(transposedMatrix[i][j]);
+		for (i = 0, n = 0; i < m0Len && n < pLen; i++) {
+			for (j = 0; j < mLen && n < pLen; j++, n++) {
+				builder.append(transposedMatrix[j][i]);
 			}
 		}
 		

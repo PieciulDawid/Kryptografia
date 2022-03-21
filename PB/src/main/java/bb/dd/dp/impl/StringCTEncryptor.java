@@ -37,7 +37,7 @@ public class StringCTEncryptor implements CTEncryptor<String> {
 		}
 		
 		for (int i = 0; i < keyChars.length; i++) {
-			numericKey[i] = letters.get(keyChars[i]).pollFirst();
+			numericKey[i] = letters.get(keyChars[i]).pollFirst() + 1;
 		}
 		
 		return numericKey;
