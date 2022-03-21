@@ -1,4 +1,4 @@
-module bb.dd.dp.zadanie1 {
+module bb.dd.dp {
     requires javafx.controls;
     requires javafx.fxml;
     requires org.apache.commons.lang3;
