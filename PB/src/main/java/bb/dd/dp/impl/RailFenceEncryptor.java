@@ -26,12 +26,12 @@ public class RailFenceEncryptor implements Encryptor {
 		}
 		
 		
-		int i = 0, j;
+		int i = 0, j;//Fixme Jest już lepiej ale dla sypię się dla kluczy parzystych
 		while (i < length) {
 			for (j = 0; j < key && i < length; j++, i++) {
 				intermediateRep[j].append(plainTextChars[i]);
 			}
-			for (j = 0; j >= 0 && i < length; j--, i++) {
+			for (j = 1; j >= 1 && i < length; j--, i++) {
 				intermediateRep[j].append(plainTextChars[i]);
 			}
 		}
