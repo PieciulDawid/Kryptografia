@@ -50,7 +50,7 @@ public class StringCTEncryptor implements CTEncryptor<String> {
 				.sequential()
 				.toArray();
 		
-		for (int i = 0; i < keyCP.length; i++) {
+		for (int i = keyCP.length-1; i >= 0; i--) {
 			final int numericValue = CPToOrdinal.get(keyCP[i]);
 			
 			numericKey[i] = numericValue;

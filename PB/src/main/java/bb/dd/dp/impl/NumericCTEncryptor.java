@@ -39,7 +39,7 @@ public class NumericCTEncryptor implements CTEncryptor<int[]> {
 		
 		for (n = 0, i--; i < m0Len; i++) {
 			for (; j < mLen; j++, n++) {
-				matrix[j][i] = padding[n];
+				matrix[j][i] = 0; /*padding[n];*/
 			}
 			j = 0;
 		}
