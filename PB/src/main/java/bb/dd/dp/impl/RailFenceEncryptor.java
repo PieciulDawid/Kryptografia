@@ -2,7 +2,7 @@ package bb.dd.dp.impl;
 
 import java.util.ArrayDeque;
 import java.util.Arrays;
-import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class RailFenceEncryptor implements Encryptor {
 	private final int key;
@@ -16,94 +16,99 @@ public class RailFenceEncryptor implements Encryptor {
 	public String encrypt(String plainText) {
 		final int length = plainText.length();
 
-		final char[] plainTextChars = plainText.toCharArray();
+		final var plainTextCP = plainText.codePoints()
+				.sequential()
+				.mapToObj(Character::toString)
+				.toArray(String[]::new);
 
 		final var intermediateRep = new StringBuilder[key];
-		final var concatenatedRep = new StringBuilder(length);
 
 		for (int i = 0; i < key; i++) {
 			intermediateRep[i] = new StringBuilder();
 		}
-
-
-		int i = 0, j = 0;//Fixme Jest już lepiej ale dla sypię się dla kluczy parzystych
+		
+		
+		int i = 0, j = 0;
 		while (i < length) {
 			for (; j < key - 1 && i < length; j++, i++) {
-				intermediateRep[j].append(plainTextChars[i]);
+				intermediateRep[j].append(plainTextCP[i]);
 			}
 			for (; j > 0 && i < length; j--, i++) {
-				intermediateRep[j].append(plainTextChars[i]);
+				intermediateRep[j].append(plainTextCP[i]);
 			}
 		}
-
-		for (final var row : intermediateRep) {
-			concatenatedRep.append(row);
-		}
-
-		return concatenatedRep.toString();
+		
+		return String.join("", intermediateRep);
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public String decrypt(String cipherText) {
 		final int length = cipherText.length();
 		final int peeks = (length - 1) / (2 * (key - 1)) + 1;
 		final int valleys = (length + key - 2) / (2 * (key - 1));
 		final int endMark = length - valleys;
-		int tail = ((length - 1) % (2 * (key - 1)));
+		final int tail = (length - 1) % (2 * (key - 1));
+		final int phantomTailStartingLevel = (2 * (key - 1)) - tail - 1;
+		int regularTailRemaining = Math.min(tail, key - 1);
 		
-		final char[] plainTextChars = new char[length];
-		cipherText.getChars(0, length, plainTextChars, 0);
+		final var cipherTextCP = cipherText.codePoints()
+				.sequential()
+				.toArray();
 		
-		final var intermediateRep = new ArrayDeque[peeks];
+		@SuppressWarnings("unchecked")
+		final ArrayDeque<Integer>[] intermediateRep = new ArrayDeque[peeks + 1];
 		
-		for (int i = 0; i < peeks; i++) {
-			intermediateRep[i] = new ArrayDeque<Character>();
+		for (int i = 0; i <= peeks; i++) {
+			intermediateRep[i] = new ArrayDeque<>();
 		}
-		
+
 		
 		var curr = 0;
 		
-		for (int i = 0; i < peeks; i++, curr++) {
-			intermediateRep[i].add(plainTextChars[curr]);
+		for (int i = 0; i < peeks; i++) {
+			intermediateRep[i].add(cipherTextCP[curr++]);
 		}
 		
-		while (curr < endMark) {
-			intermediateRep[0].addLast(plainTextChars[curr++]);
+		for (int level = 0; curr < endMark; level++) {
+			intermediateRep[0].addLast(cipherTextCP[curr++]);
 			
 			for (int i = 1; i < peeks - 1 && curr < endMark; i++) {
-				intermediateRep[i].addFirst(plainTextChars[curr++]);
+				intermediateRep[i].addFirst(cipherTextCP[curr++]);
 				
 				if (curr >= endMark) {
 					break;
 				}
-				intermediateRep[i].addLast(plainTextChars[curr++]);
+				intermediateRep[i].addLast(cipherTextCP[curr++]);
 			}
 			
 			if (curr >= endMark) {
 				break;
 			}
-			intermediateRep[peeks - 1].addFirst(plainTextChars[curr++]);
+			intermediateRep[peeks - 1].addFirst(cipherTextCP[curr++]);
 			
 			if (curr >= endMark) {
 				break;
 			}
-			if (tail-- > 0) {
-				intermediateRep[peeks - 1].addLast(plainTextChars[curr++]);
+			if (regularTailRemaining-- > 0) {
+				intermediateRep[peeks - 1].addLast(cipherTextCP[curr++]);
+			}
+			
+			if (curr >= endMark) {
+				break;
+			}
+			if (level >= phantomTailStartingLevel) {
+				intermediateRep[peeks].addFirst(cipherTextCP[curr++]);
 			}
 		}
 		
-		for (int i = 0; curr < length; i++, curr++) {
-			intermediateRep[i].addLast(plainTextChars[curr]);
+		for (int i = 0; curr < length; i++) {
+			intermediateRep[i].addLast(cipherTextCP[curr++]);
 		}
 		
-		return (String) Arrays.stream(intermediateRep)
+		return Arrays.stream(intermediateRep)
 				.flatMap(ArrayDeque::stream)
-				.collect(Collector.of(
-						StringBuilder::new,
-						StringBuilder::append,
-						StringBuilder::append,
-						StringBuilder::toString));
+				.map(Character::toString)
+				.collect(Collectors.joining());
 	}
 	
 }

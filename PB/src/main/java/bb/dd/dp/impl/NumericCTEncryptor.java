@@ -13,24 +13,27 @@ public class NumericCTEncryptor implements CTEncryptor<int[]> {
 	
 	@Override
 	public String encrypt(String plainText) {
-		final char[][] matrix = new char[key.length][d];
+		final int[][] matrix = new int[key.length][d];
 		
-		final char[] plainTextChars = plainText.toCharArray();
+		final int[] plainTextCP = plainText.codePoints()
+				.sequential()
+				.toArray();
 		
-		final char[] padding = RandomStringUtils
-				.randomAlphabetic(key.length * d - plainTextChars.length)
-				.toCharArray();
+		final int[] padding = RandomStringUtils
+				.randomAlphabetic(Math.max(key.length * d - plainTextCP.length, 0))
+				.codePoints()
+				.toArray();
 		
 		final var builder = new StringBuilder(key.length * d);
 		
 		int i, j = 0, n;
-		int pLen = plainTextChars.length;
+		int pLen = plainTextCP.length;
 		int mLen = matrix.length;
 		int m0Len = matrix[0].length;
 		
 		for (i = 0, n = 0; i < m0Len && n < pLen; i++) {
 			for (j = 0; j < mLen && n < pLen; j++, n++) {
-				matrix[j][i] = plainTextChars[n];
+				matrix[j][i] = plainTextCP[n];
 			}
 		}
 		
@@ -41,7 +44,7 @@ public class NumericCTEncryptor implements CTEncryptor<int[]> {
 			j = 0;
 		}
 		
-		final char[][] transposedMatrix = new char[key.length][];
+		final int[][] transposedMatrix = new int[key.length][];
 		
 		for (i = 0; i < mLen; i++) {
 			transposedMatrix[i] = matrix[key[i] - 1];
@@ -50,7 +53,8 @@ public class NumericCTEncryptor implements CTEncryptor<int[]> {
 		
 		for (i = 0, n = 0; i < m0Len; i++) {
 			for (j = 0; j < mLen; j++, n++) {
-				builder.append(transposedMatrix[j][i]);
+				builder.append(
+						Character.toString(transposedMatrix[j][i]));
 			}
 		}
 		
@@ -59,9 +63,11 @@ public class NumericCTEncryptor implements CTEncryptor<int[]> {
 	
 	@Override
 	public String decrypt(String cipherText) {
-		final char[][] matrix = new char[key.length][d];
+		final int[][] matrix = new int[key.length][d];
 		
-		final char[] cipherTextChars = cipherText.toCharArray();
+		final int[] cipherTextChars = cipherText.codePoints()
+				.sequential()
+				.toArray();
 		
 		final var builder = new StringBuilder(key.length * d);
 		
@@ -76,15 +82,16 @@ public class NumericCTEncryptor implements CTEncryptor<int[]> {
 			}
 		}
 		
-		final char[][] transposedMatrix = new char[key.length][];
+		final int[][] transposedMatrix = new int[key.length][];
 		
 		for (i = 0; i < transposedMatrix.length; i++) {
 			transposedMatrix[key[i] - 1] = matrix[i];
 		}
 		
-		for (i = 0, n = 0; i < m0Len && n < pLen; i++) {
-			for (j = 0; j < mLen && n < pLen; j++, n++) {
-				builder.append(transposedMatrix[j][i]);
+		for (i = 0, n = 0; i < m0Len; i++) {
+			for (j = 0; j < mLen; j++, n++) {
+				builder.append(
+						Character.toString(transposedMatrix[j][i]));
 			}
 		}
 		

@@ -78,129 +78,176 @@ public class HelloController {
 
     @FXML
     private Label rfOutput;
-
+    
+    
+    private RailFenceEncryptor railFenceEncryptor;
+    
+    private NumericCTEncryptor numericCTEncryptor;
+    
+    private StringCTEncryptor stringCTEncryptor;
+    
     //Rail fence - szyfrowanie
     @FXML
-    public void rfEncodeClick(){
-        if(rfInput.getText().equals("") || rfKey.getText().equals("")){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText("Wszystkie pola muszą być wypełnione");
-
-            alert.showAndWait();
+    public void rfEncodeClick() {
+        if (rfInput.getText().isBlank() || railFenceEncryptor == null) {
+            showErrorDialog("Wszystkie pola muszą być wypełnione");
             return;
         }
-        RailFenceEncryptor railFenceEncryptor = new RailFenceEncryptor(Integer.parseInt(rfKey.getText()));
+        
         rfOutput.setText(railFenceEncryptor.encrypt(rfInput.getText()));
     }
 
     //Rail fence - deszyfrowanie
     @FXML
-    public void rfDecodeClick(){
-        if(rfInput.getText().equals("") || rfKey.getText().equals("")){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText("Wszystkie pola muszą być wypełnione");
-
-            alert.showAndWait();
+    public void rfDecodeClick() {
+        if (rfInput.getText().isBlank() || railFenceEncryptor == null) {
+            showErrorDialog("Wszystkie pola muszą być wypełnione");
             return;
         }
-        RailFenceEncryptor railFenceEncryptor = new RailFenceEncryptor(Integer.parseInt(rfKey.getText()));
+        
         rfOutput.setText(railFenceEncryptor.decrypt(rfInput.getText()));
     }
 
     //Przestawienie macierzowe - szyfrowanie
     @FXML
-    public void pmEncodeClick(){
-        if(pmKey.getText().equals("") || pmDepth.getText().equals("") || pmOutput.getText().equals("")){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText("Wszystkie pola muszą być wypełnione");
-
-            alert.showAndWait();
+    public void pmEncodeClick() {
+        if (pmInput.getText().isBlank() || numericCTEncryptor == null) {
+            showErrorDialog("Wszystkie pola muszą być wypełnione");
             return;
         }
-
-        String pmKeyString = pmKey.getText();
-        int[] key = Arrays.stream(pmKeyString.split(","))
-                .mapToInt(Integer::parseInt)
-                .toArray();
-        NumericCTEncryptor numericCTEncryptor = new NumericCTEncryptor(key,Integer.parseInt(pmDepth.getText()));
+        
         pmOutput.setText(numericCTEncryptor.encrypt(pmInput.getText()));
     }
 
     //Przestawienie macierzowe - deszyfrowanie
     @FXML
-    public void pmDecodeClick(){
-
-        if(pmKey.getText().equals("") || pmDepth.getText().equals("") || pmOutput.getText().equals("")){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText("Wszystkie pola muszą być wypełnione");
-
-            alert.showAndWait();
+    public void pmDecodeClick() {
+        if (pmInput.getText().isBlank() || numericCTEncryptor == null) {
+            showErrorDialog("Wszystkie pola muszą być wypełnione");
             return;
         }
-        String pmKeyString = pmKey.getText();
-        int[] key = Arrays.stream(pmKeyString.split(","))
-                .mapToInt(Integer::parseInt)
-                .toArray();
-        NumericCTEncryptor numericCTEncryptor = new NumericCTEncryptor(key,Integer.parseInt(pmDepth.getText()));
+        
         pmOutput.setText(numericCTEncryptor.decrypt(pmInput.getText()));
     }
-
+    
     //Przestawienie macierzowe słowo - szyfrowanie
     @FXML
-    public void pmsEncodeClick(){
-
-        if(pmsKey.getText().equals("") || pmsDepth.getText().equals("") || pmsOutput.getText().equals("")){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText("Wszystkie pola muszą być wypełnione");
-
-            alert.showAndWait();
+    public void pmsEncodeClick() {
+        if (pmsInput.getText().isBlank() || stringCTEncryptor == null) {
+            showErrorDialog("Wszystkie pola muszą być wypełnione");
             return;
         }
-
-        StringCTEncryptor stringCTEncryptor = new StringCTEncryptor(pmsKey.getText(), Integer.parseInt(pmsDepth.getText()));
+        
         pmsOutput.setText(stringCTEncryptor.encrypt(pmsInput.getText()));
     }
 
     //Przestawienie macierzowe słowo - deszyfrowanie
     @FXML
-    public void pmsDecodeClick(){
-
-        if(pmsKey.getText().equals("") || pmsDepth.getText().equals("") || pmsOutput.getText().equals("")){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText("Wszystkie pola muszą być wypełnione");
-
-            alert.showAndWait();
+    public void pmsDecodeClick() {
+        if (pmsInput.getText().isBlank() || stringCTEncryptor == null) {
+            showErrorDialog("Wszystkie pola muszą być wypełnione");
             return;
         }
-        StringCTEncryptor stringCTEncryptor = new StringCTEncryptor(pmsKey.getText(), Integer.parseInt(pmsDepth.getText()));
+    
         pmsOutput.setText(stringCTEncryptor.decrypt(pmsInput.getText()));
     }
-
+    
+    private void showErrorDialog(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        
+        alert.showAndWait();
+    }
+    
+    
     @FXML
-    public void onClickLableRf(){
+    public void onParamsChangedRf() {
+        var keyText = rfKey.getText();
+        if (keyText.isBlank()) {
+            railFenceEncryptor = null;
+            return;
+        }
+        
+        if (!keyText.matches("[0-9]{0,5}")) {
+            rfKey.setText("");
+            showErrorDialog("Zły format klucza");
+            return;
+        }
+        
+        int key = Integer.parseInt(keyText);
+        railFenceEncryptor = new RailFenceEncryptor(key);
+    }
+    
+    @FXML
+    public void onParamsChangedPm() {
+        var keyText = pmKey.getText();
+        var depthText = pmDepth.getText().strip();
+        if (keyText.isBlank() || depthText.isBlank()) {
+            numericCTEncryptor = null;
+            return;
+        }
+        
+        
+        int[] key = Arrays.stream(keyText.split("([,-.;:|]|\\s){0,5}"))
+                .filter(s -> s.matches("[0-9]+"))
+                .mapToInt(Integer::parseInt)
+                .toArray();
+        
+        if (key.length < 1) {
+            numericCTEncryptor = null;
+            return;
+        }
+        
+        if (!depthText.matches("[0-9]{0,5}")) {
+            pmDepth.setText("");
+            showErrorDialog("Zły format klucza");
+            numericCTEncryptor = null;
+            return;
+        }
+        
+        int depth = Integer.parseInt(depthText);
+        numericCTEncryptor = new NumericCTEncryptor(key, depth);
+    }
+    
+    @FXML
+    public void onParamsChangedPms() {
+        var keyText = pmsKey.getText();
+        var depthText = pmsDepth.getText();
+        if (keyText.isBlank() || depthText.isBlank()) {
+            stringCTEncryptor = null;
+            return;
+        }
+        
+        if (!depthText.matches("[0-9]{0,5}")) {
+            pmsDepth.setText("");
+            showErrorDialog("Zły format klucza");
+            stringCTEncryptor = null;
+            return;
+        }
+        
+        int depth = Integer.parseInt(depthText);
+        stringCTEncryptor = new StringCTEncryptor(keyText, depth);
+    }
+
+    
+    @FXML
+    public void onClickLabelRf() {
         toClipboard(rfOutput.getText());
     }
+    
     @FXML
-    public void onClickLablePm(){
+    public void onClickLabelPm() {
         toClipboard(pmOutput.getText());
     }
+    
     @FXML
-    public void onClickLablePms(){
+    public void onClickLabelPms() {
         toClipboard(pmsOutput.getText());
     }
-    public void toClipboard(String clip){
+    
+    public void toClipboard(String clip) {
         final Clipboard clipboard = Clipboard.getSystemClipboard();
         final ClipboardContent content = new ClipboardContent();
         content.putString(clip);
