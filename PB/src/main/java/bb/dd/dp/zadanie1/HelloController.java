@@ -78,14 +78,53 @@ public class HelloController {
 
     @FXML
     private Label rfOutput;
-    
-    
+
+    @FXML
+    private Button lsfrNew;
+
+    @FXML
+    private Button lsfrNext;
+
+    @FXML
+    private Label lsfrOutput;
+
+    @FXML
+    private TextField lsfrPoly;
+
+    @FXML
+    private Label lsfrPolyOutput;
+
+    @FXML
+    private Button sccDecode;
+
+    @FXML
+    private Button sccEncode;
+
+    @FXML
+    private TextArea sccInput;
+
+    @FXML
+    private Label sccOutput;
+
+    @FXML
+    private TextField sccPoly;
+
+    @FXML
+    private Label sccPolyOutput;
+
+    @FXML
+    private TextField sccSeed;
+
+
+
+
     private RailFenceEncryptor railFenceEncryptor;
     
     private NumericCTEncryptor numericCTEncryptor;
     
     private StringCTEncryptor stringCTEncryptor;
-    
+
+    //Zadanie 1
     //Rail fence - szyfrowanie
     @FXML
     public void rfEncodeClick() {
@@ -151,7 +190,7 @@ public class HelloController {
     
         pmsOutput.setText(stringCTEncryptor.decrypt(pmsInput.getText()));
     }
-    
+    // Popup do walidacji
     private void showErrorDialog(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error Dialog");
@@ -231,7 +270,7 @@ public class HelloController {
         stringCTEncryptor = new StringCTEncryptor(keyText, depth);
     }
 
-    
+    // Obsługa copiowania z lable
     @FXML
     public void onClickLabelRf() {
         toClipboard(rfOutput.getText());
@@ -253,4 +292,6 @@ public class HelloController {
         content.putString(clip);
         clipboard.setContent(content);
     }
+
 }
+
