@@ -23,8 +23,8 @@
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                            <children>
                               <TextField fx:id="lsfrPoly" onKeyTyped="#onParamsChangedRf" promptText="Wielomian np. 3,6,7,9" />
-                              <Button fx:id="lsfrNext" mnemonicParsing="false" onAction="#rfEncodeClick" text="Następny" />
-                              <Button fx:id="lsfrNew" mnemonicParsing="false" onAction="#rfDecodeClick" text="Nowy seed" />
+                              <Button fx:id="lsfrNext" mnemonicParsing="false" onAction="#onClickNext" text="Następny" />
+                              <Button fx:id="lsfrNew" mnemonicParsing="false" onAction="#onClickNewSeed" text="Nowy seed" />
                            </children>
                         </HBox>
                         <Separator prefWidth="200.0" />
@@ -68,7 +68,7 @@
                                  </HBox.margin>
                               </Label>
                               <Button fx:id="sccDecode" mnemonicParsing="false" onAction="#pmDecodeClick" text="Deszyfruj" />
-                              <Button fx:id="sccEncode" mnemonicParsing="false" onAction="#pmEncodeClick" text="Szyfruj" />
+                              <Button fx:id="sccEncode" mnemonicParsing="false" onAction="#sccEncodeClick" text="Szyfruj" />
                            </children>
                            <padding>
                               <Insets right="17.0" />

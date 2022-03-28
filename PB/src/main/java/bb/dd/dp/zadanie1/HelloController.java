@@ -3,12 +3,15 @@ package bb.dd.dp.zadanie1;
 import bb.dd.dp.impl.NumericCTEncryptor;
 import bb.dd.dp.impl.RailFenceEncryptor;
 import bb.dd.dp.impl.StringCTEncryptor;
+import bb.dd.dp.impl2.LSFRImpl;
+import bb.dd.dp.impl2.SynchronousStreamCipherEncryptor;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.util.Duration;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 
 
@@ -124,6 +127,9 @@ public class HelloController {
     
     private StringCTEncryptor stringCTEncryptor;
 
+    private LSFRImpl lsfr;
+
+    private SynchronousStreamCipherEncryptor synchronousStreamCipherEncryptor;
     //Zadanie 1
     //Rail fence - szyfrowanie
     @FXML
@@ -291,6 +297,59 @@ public class HelloController {
         final ClipboardContent content = new ClipboardContent();
         content.putString(clip);
         clipboard.setContent(content);
+    }
+
+    //Zadanie 2
+    //FIXME Brak generowania seed. Dla podanego seed'a wynik jest błędny
+    @FXML
+    public void onClickNewSeed(){
+        // towrzenie wielomianu do wyświetlania
+        String[] polyStr = lsfrPoly.getText().split(",");
+        String poly = "1 + x^" + String
+                .join(" + x^",polyStr);
+        lsfrPolyOutput.setText(poly);
+
+
+        lsfr = new LSFRImpl(Arrays
+                .stream(polyStr)
+                .mapToInt(Integer::parseInt)
+                .toArray());
+        BigInteger b = new BigInteger("011010101010101010101010101010101010101");
+        lsfr.setSeed(b);
+        lsfrOutput.setText(lsfr.nextState().toString());
+
+    }
+
+    @FXML
+    public void onClickNext(){
+        lsfrOutput.setText(lsfr.nextState().toString());
+    }
+
+     public void sccEncodeClick(){
+        String[] polyStr = sccPoly.getText().split(",");
+        synchronousStreamCipherEncryptor = new SynchronousStreamCipherEncryptor(Arrays
+                .stream(polyStr)
+                .mapToInt(Integer::parseInt)
+                .toArray());
+
+        BigInteger b = new BigInteger("011010101010101010101010101010101010101");
+        synchronousStreamCipherEncryptor.setSeed(b);
+
+        sccSeed.setText(b.toString());
+
+        sccOutput.setText(synchronousStreamCipherEncryptor.encrypt(sccInput.getText()));
+     }
+
+    public void sccDecodeClick(){
+        String[] polyStr = sccPoly.getText().split(",");
+        synchronousStreamCipherEncryptor = new SynchronousStreamCipherEncryptor(Arrays
+                .stream(polyStr)
+                .mapToInt(Integer::parseInt)
+                .toArray());
+
+        synchronousStreamCipherEncryptor.setSeed(new BigInteger(sccSeed.getText()));
+
+        sccOutput.setText(synchronousStreamCipherEncryptor.decrypt(sccInput.getText()));
     }
 
 }
