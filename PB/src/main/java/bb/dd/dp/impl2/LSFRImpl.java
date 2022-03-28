@@ -19,12 +19,27 @@ public class LSFRImpl implements LSFR {
 	}
 	
 	@Override
-	public BigInteger next() {
+	public BigInteger nextState() {
 		nextBit();
 		
 		return state;
 	}
 	
+	@Override
+	public boolean nextBit() {
+		boolean next = false;
+		
+		for (int bit : polynomialCoefficients) {
+			next ^= state.testBit(bit);
+		}
+		
+		state = state.shiftLeft(1).clearBit(CUTOFF);
+		state = next ? state.setBit(0) : state;
+		
+		return next;
+	}
+	
+	@Override
 	public byte next8BitSequence() {
 		byte returned = 0;
 		
@@ -39,19 +54,6 @@ public class LSFRImpl implements LSFR {
 		returned += nextBit() ? 0b1000_0000 : 0;
 		
 		return returned;
-	}
-	
-	private boolean nextBit() {
-		boolean next = false;
-		
-		for (int bit : polynomialCoefficients) {
-			next ^= state.testBit(bit);
-		}
-		
-		state = state.shiftLeft(1).clearBit(CUTOFF);
-		state = next ? state.setBit(0) : state;
-		
-		return next;
 	}
 	
 }

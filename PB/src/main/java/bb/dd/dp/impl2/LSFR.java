@@ -5,6 +5,9 @@ import java.math.BigInteger;
 public interface LSFR {
 	void setSeed(BigInteger seed);
 	
-	BigInteger next();
+	BigInteger nextState();
 	
+	boolean nextBit();
+	
+	byte next8BitSequence();
 }
