@@ -314,15 +314,15 @@ public class HelloController {
                 .stream(polyStr)
                 .mapToInt(Integer::parseInt)
                 .toArray());
-        BigInteger b = new BigInteger("011010101010101010101010101010101010101");
+        BigInteger b = new BigInteger("16");
         lsfr.setSeed(b);
-        lsfrOutput.setText(lsfr.nextState().toString());
+        lsfrOutput.setText(lsfr.nextState().toString(2));
 
     }
 
     @FXML
     public void onClickNext(){
-        lsfrOutput.setText(lsfr.nextState().toString());
+        lsfrOutput.setText(lsfr.nextState().toString(2));
     }
 
      public void sccEncodeClick(){
@@ -332,7 +332,7 @@ public class HelloController {
                 .mapToInt(Integer::parseInt)
                 .toArray());
 
-        BigInteger b = new BigInteger("011010101010101010101010101010101010101");
+        BigInteger b = new BigInteger("16");
         synchronousStreamCipherEncryptor.setSeed(b);
 
         sccSeed.setText(b.toString());

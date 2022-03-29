@@ -22,11 +22,11 @@ public class SynchronousStreamCipherEncryptor extends SynchronousStreamCipherImp
 	
 	@Override
 	public String decrypt(String cipherText) {
-		var hexStringBytes = cipherText.split("\\s{0,5}");
+		var hexStringBytes = cipherText.split("\\s{1,5}");
 		var bytes = new byte[hexStringBytes.length];
 		
 		for (int i = 0; i < bytes.length; i++) {
-			bytes[i] = Byte.parseByte(hexStringBytes[i], 16);
+			bytes[i] = (byte) Integer.parseUnsignedInt(hexStringBytes[i], 16);
 		}
 		
 		return new String(bytes);
