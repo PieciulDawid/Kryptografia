@@ -346,12 +346,6 @@ public class HelloController {
      }
 
     public void sccDecodeClick(){
-        String[] polyStr = sccPoly.getText().split(",");
-        synchronousStreamCipherEncryptor = new SynchronousStreamCipherEncryptor(Arrays
-                .stream(polyStr)
-                .mapToInt(Integer::parseInt)
-                .toArray());
-
         sccOutput.setText(synchronousStreamCipherEncryptor.decrypt(sccInput.getText()));
     }
 
