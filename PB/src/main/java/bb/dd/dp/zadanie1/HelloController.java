@@ -352,8 +352,6 @@ public class HelloController {
                 .mapToInt(Integer::parseInt)
                 .toArray());
 
-        synchronousStreamCipherEncryptor.setSeed(new BigInteger(sccSeed.getText()));
-
         sccOutput.setText(synchronousStreamCipherEncryptor.decrypt(sccInput.getText()));
     }
 
