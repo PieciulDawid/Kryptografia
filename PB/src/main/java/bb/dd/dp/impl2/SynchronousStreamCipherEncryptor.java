@@ -29,7 +29,7 @@ public class SynchronousStreamCipherEncryptor extends SynchronousStreamCipherImp
 			bytes[i] = (byte) Integer.parseUnsignedInt(hexStringBytes[i], 16);
 		}
 		
-		return new String(bytes);
+		return new String(decrypt(bytes));
 	}
 	
 }
