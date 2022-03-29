@@ -75,7 +75,7 @@
                            </padding>
                         </HBox>
                         <Separator prefWidth="200.0" />
-                        <Label fx:id="sccOutput" alignment="TOP_CENTER" minHeight="120.0" minWidth="580.0" onMouseClicked="#onClickLabelPm" text="Wynik">
+                        <Label fx:id="sccOutput" alignment="TOP_CENTER" minHeight="120.0" minWidth="580.0" onMouseClicked="#onClickLabelScc" text="Wynik">
                            <VBox.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
                            </VBox.margin>

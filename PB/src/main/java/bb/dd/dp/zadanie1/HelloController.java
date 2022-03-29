@@ -291,6 +291,11 @@ public class HelloController {
     public void onClickLabelPms() {
         toClipboard(pmsOutput.getText());
     }
+
+    @FXML
+    public void onClickLabelScc() {
+        toClipboard(sccOutput.getText());
+    }
     
     public void toClipboard(String clip) {
         final Clipboard clipboard = Clipboard.getSystemClipboard();
