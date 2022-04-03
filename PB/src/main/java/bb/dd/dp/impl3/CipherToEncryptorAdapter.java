@@ -15,7 +15,7 @@ public interface CipherToEncryptorAdapter extends Cipher, Encryptor {
 		return asHexString.toString();
 	}
 	
-	private byte[] decodeCipherTextFromString(String cipherText) {
+	default byte[] decodeCipherTextFromString(String cipherText) {
 		var hexStringBytes = cipherText.split("\\s{1,5}");
 		var bytes = new byte[hexStringBytes.length];
 		
