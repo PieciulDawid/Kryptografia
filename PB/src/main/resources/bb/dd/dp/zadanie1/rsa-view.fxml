@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="bb.dd.dp.zadanie1.RsaController"
+      prefHeight="371.2" prefWidth="600.0">
+
+    <TextArea fx:id="input" prefHeight="130.0" prefWidth="579.0" promptText="Tekst jawny" wrapText="true">
+        <VBox.margin>
+            <Insets left="10.0" right="10.0" top="10.0"/>
+        </VBox.margin>
+    </TextArea>
+    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
+        <padding>
+            <Insets left="20.0" right="20.0"/>
+        </padding>
+        <opaqueInsets>
+            <Insets/>
+        </opaqueInsets>
+        <Button mnemonicParsing="false" onAction="#encode" text="Szyfruj"/>
+        <Button mnemonicParsing="false" onAction="#decode" text="Deszyfruj"/>
+    </HBox>
+    <Separator prefWidth="200.0"/>
+    <Label fx:id="output" alignment="TOP_CENTER" minHeight="120.0" minWidth="580.0"
+           onMouseClicked="#copyLabelContents" text="Wynik" textAlignment="CENTER" wrapText="true">
+        <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="5.0"/>
+        </VBox.margin>
+    </Label>
+
+</VBox>

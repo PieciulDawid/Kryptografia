@@ -1,181 +1,132 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bb.dd.dp.zadanie1.HelloController">
-   <tabs>
-      <Tab text="LSFR">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <VBox layoutX="250.0" layoutY="76.0" prefHeight="371.2" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
-                           <children>
-                              <TextField fx:id="lsfrPoly" onKeyTyped="#onParamsChangedRf" promptText="Wielomian np. 3,6,7,9" />
-                              <Button fx:id="lsfrNext" mnemonicParsing="false" onAction="#onClickNext" text="Następny" />
-                              <Button fx:id="lsfrNew" mnemonicParsing="false" onAction="#onClickNewSeed" text="Nowy seed" />
-                           </children>
-                        </HBox>
-                        <Separator prefWidth="200.0" />
-                        <Label fx:id="lsfrPolyOutput" minHeight="36.0" minWidth="580.0" onMouseClicked="#onClickLabelRf" prefHeight="36.0" prefWidth="580.0" text="Wielomian">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" />
-                           </VBox.margin>
-                           <padding>
-                              <Insets left="40.0" />
-                           </padding>
-                        </Label>
-                        <Label fx:id="lsfrOutput" alignment="TOP_CENTER" minHeight="120.0" minWidth="580.0" onMouseClicked="#onClickLabelRf" prefHeight="168.0" prefWidth="580.0" text="Wynik" />
-                     </children>
-                  </VBox>
-               </children>
-            </AnchorPane>
-         </content>
-      </Tab>
-      <Tab text="SCC">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <VBox layoutX="250.0" layoutY="76.0" prefHeight="371.2" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <TextArea fx:id="sccInput" prefHeight="130.0" prefWidth="579.0" promptText="Tekst jawny">
-                           <VBox.margin>
-                              <Insets left="10.0" right="10.0" top="10.0" />
-                           </VBox.margin>
-                        </TextArea>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
-                           <children>
-                              <TextField fx:id="sccPoly" onKeyTyped="#onParamsChangedPm" prefHeight="26.0" prefWidth="116.0" promptText="Wielomian" />
-                              <TextField fx:id="sccSeed" onKeyTyped="#onParamsChangedPm" prefHeight="26.0" prefWidth="400.0" promptText="Seed" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
-                           <children>
-                              <Label fx:id="sccPolyOutput" prefHeight="18.0" prefWidth="366.0" text="Wielomian">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </Label>
-                              <Button fx:id="sccDecode" mnemonicParsing="false" onAction="#sccDecodeClick" text="Deszyfruj" />
-                              <Button fx:id="sccEncode" mnemonicParsing="false" onAction="#sccEncodeClick" text="Szyfruj" />
-                           </children>
-                           <padding>
-                              <Insets right="17.0" />
-                           </padding>
-                        </HBox>
-                        <Separator prefWidth="200.0" />
-                        <Label fx:id="sccOutput" alignment="TOP_CENTER" minHeight="120.0" minWidth="580.0" onMouseClicked="#onClickLabelScc" text="Wynik">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
-                           </VBox.margin>
-                        </Label>
-                     </children>
-                  </VBox>
-               </children>
-            </AnchorPane>
-         </content>
-      </Tab>
-      <Tab text="Rail fence">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <VBox layoutX="250.0" layoutY="76.0" prefHeight="371.2" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <TextArea fx:id="rfInput" prefHeight="130.0" prefWidth="579.0" promptText="Tekst jawny">
-                           <VBox.margin>
-                              <Insets left="10.0" right="10.0" top="10.0" />
-                           </VBox.margin>
-                        </TextArea>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
-                           <children>
-                              <TextField fx:id="rfKey" onKeyTyped="#onParamsChangedRf" promptText="Klucz " />
-                              <Button fx:id="rfEncode" mnemonicParsing="false" onAction="#rfEncodeClick" text="Szyfruj" />
-                              <Button fx:id="rfDecode" mnemonicParsing="false" onAction="#rfDecodeClick" text="Deszyfruj" />
-                           </children>
-                        </HBox>
-                        <Separator prefWidth="200.0" />
-                        <Label fx:id="rfOutput" alignment="TOP_CENTER" minHeight="120.0" minWidth="580.0" onMouseClicked="#onClickLabelRf" text="Wynik">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" />
-                           </VBox.margin>
-                        </Label>
-                     </children>
-                  </VBox>
-               </children></AnchorPane>
-         </content>
-      </Tab>
-      <Tab text="Przestawienie macierzowe">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <VBox layoutX="250.0" layoutY="76.0" prefHeight="371.2" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <TextArea fx:id="pmInput" prefHeight="130.0" prefWidth="579.0" promptText="Tekst jawny">
-                           <VBox.margin>
-                              <Insets left="10.0" right="10.0" top="10.0" />
-                           </VBox.margin>
-                        </TextArea>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
-                           <children>
-                              <TextField fx:id="pmDepth" onKeyTyped="#onParamsChangedPm" promptText="Głębokość (np. 4)" />
-                              <TextField fx:id="pmKey" onKeyTyped="#onParamsChangedPm" promptText="Klucz (np. 1,2,3,4,5)" />
-                              <Button fx:id="pmEncode" mnemonicParsing="false" onAction="#pmEncodeClick" text="Szyfruj" />
-                              <Button fx:id="pmDecode" mnemonicParsing="false" onAction="#pmDecodeClick" text="Deszyfruj" />
-                           </children>
-                        </HBox>
-                        <Separator prefWidth="200.0" />
-                        <Label fx:id="pmOutput" alignment="TOP_CENTER" minHeight="120.0" minWidth="580.0" onMouseClicked="#onClickLabelPm" text="Wynik">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
-                           </VBox.margin>
-                        </Label>
-                     </children>
-                  </VBox>
-               </children>
-            </AnchorPane>
-         </content>
-      </Tab>
-      <Tab text="Przestawienie macierzowe słowo">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <VBox layoutX="250.0" layoutY="76.0" prefHeight="371.2" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <TextArea fx:id="pmsInput" prefHeight="130.0" prefWidth="579.0" promptText="Tekst jawny">
-                           <VBox.margin>
-                              <Insets left="10.0" right="10.0" top="10.0" />
-                           </VBox.margin>
-                        </TextArea>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
-                           <children>
-                              <TextField fx:id="pmsDepth" onKeyTyped="#onParamsChangedPms" promptText="Głębokość (np. 4)" />
-                              <TextField fx:id="pmsKey" onKeyTyped="#onParamsChangedPms" promptText="Klucz jako słowo" />
-                              <Button fx:id="pmsEncode" mnemonicParsing="false" onAction="#pmsEncodeClick" text="Szyfruj" />
-                              <Button fx:id="pmsDecode" mnemonicParsing="false" onAction="#pmsDecodeClick" text="Deszyfruj" />
-                           </children>
-                        </HBox>
-                        <Separator prefWidth="200.0" />
-                        <Label fx:id="pmsOutput" alignment="TOP_CENTER" minHeight="120.0" minWidth="580.0" onMouseClicked="#onClickLabelPms" text="Wynik">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
-                           </VBox.margin>
-                        </Label>
-                     </children>
-                  </VBox>
-               </children>
-            </AnchorPane>
-         </content>
-      </Tab>
-   </tabs>
+   <Tab text="RSA">
+      <fx:include source="rsa-view.fxml"/>
+   </Tab>
+   <Tab text="LSFR">
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+         <VBox layoutX="250.0" layoutY="76.0" prefHeight="371.2" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+               <TextField fx:id="lsfrPoly" onKeyTyped="#onParamsChangedRf" promptText="Wielomian np. 3,6,7,9" />
+               <Button fx:id="lsfrNext" mnemonicParsing="false" onAction="#onClickNext" text="Następny" />
+               <Button fx:id="lsfrNew" mnemonicParsing="false" onAction="#onClickNewSeed" text="Nowy seed" />
+            </HBox>
+            <Separator prefWidth="200.0" />
+            <Label fx:id="lsfrPolyOutput" minHeight="36.0" minWidth="580.0" onMouseClicked="#onClickLabelRf" prefHeight="36.0" prefWidth="580.0" text="Wielomian">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets left="40.0" />
+               </padding>
+            </Label>
+            <Label fx:id="lsfrOutput" alignment="TOP_CENTER" minHeight="120.0" minWidth="580.0" onMouseClicked="#onClickLabelRf" prefHeight="168.0" prefWidth="580.0" text="Wynik" />
+         </VBox>
+      </AnchorPane>
+   </Tab>
+   <Tab text="SCC">
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+         <VBox layoutX="250.0" layoutY="76.0" prefHeight="371.2" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TextArea fx:id="sccInput" prefHeight="130.0" prefWidth="579.0" promptText="Tekst jawny">
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </TextArea>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+               <TextField fx:id="sccPoly" onKeyTyped="#onParamsChangedPm" prefHeight="26.0" prefWidth="116.0" promptText="Wielomian" />
+               <TextField fx:id="sccSeed" onKeyTyped="#onParamsChangedPm" prefHeight="26.0" prefWidth="400.0" promptText="Seed" />
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
+               <padding>
+                  <Insets right="17.0" />
+               </padding>
+               <Label fx:id="sccPolyOutput" prefHeight="18.0" prefWidth="366.0" text="Wielomian">
+                  <HBox.margin>
+                     <Insets />
+                  </HBox.margin>
+               </Label>
+               <Button fx:id="sccDecode" mnemonicParsing="false" onAction="#sccDecodeClick" text="Deszyfruj" />
+               <Button fx:id="sccEncode" mnemonicParsing="false" onAction="#sccEncodeClick" text="Szyfruj" />
+            </HBox>
+            <Separator prefWidth="200.0" />
+            <Label fx:id="sccOutput" alignment="TOP_CENTER" minHeight="120.0" minWidth="580.0" onMouseClicked="#onClickLabelScc" text="Wynik">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+         </VBox>
+      </AnchorPane>
+   </Tab>
+   <Tab text="Rail fence">
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+         <VBox layoutX="250.0" layoutY="76.0" prefHeight="371.2" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TextArea fx:id="rfInput" prefHeight="130.0" prefWidth="579.0" promptText="Tekst jawny">
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </TextArea>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+               <TextField fx:id="rfKey" onKeyTyped="#onParamsChangedRf" promptText="Klucz " />
+               <Button fx:id="rfEncode" mnemonicParsing="false" onAction="#rfEncodeClick" text="Szyfruj" />
+               <Button fx:id="rfDecode" mnemonicParsing="false" onAction="#rfDecodeClick" text="Deszyfruj" />
+            </HBox>
+            <Separator prefWidth="200.0" />
+            <Label fx:id="rfOutput" alignment="TOP_CENTER" minHeight="120.0" minWidth="580.0" onMouseClicked="#onClickLabelRf" text="Wynik">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" />
+               </VBox.margin>
+            </Label>
+         </VBox>
+      </AnchorPane>
+   </Tab>
+   <Tab text="Przestawienie macierzowe">
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+         <VBox layoutX="250.0" layoutY="76.0" prefHeight="371.2" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TextArea fx:id="pmInput" prefHeight="130.0" prefWidth="579.0" promptText="Tekst jawny">
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </TextArea>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+               <TextField fx:id="pmDepth" onKeyTyped="#onParamsChangedPm" promptText="Głębokość (np. 4)" />
+               <TextField fx:id="pmKey" onKeyTyped="#onParamsChangedPm" promptText="Klucz (np. 1,2,3,4,5)" />
+               <Button fx:id="pmEncode" mnemonicParsing="false" onAction="#pmEncodeClick" text="Szyfruj" />
+               <Button fx:id="pmDecode" mnemonicParsing="false" onAction="#pmDecodeClick" text="Deszyfruj" />
+            </HBox>
+            <Separator prefWidth="200.0" />
+            <Label fx:id="pmOutput" alignment="TOP_CENTER" minHeight="120.0" minWidth="580.0" onMouseClicked="#onClickLabelPm" text="Wynik">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+         </VBox>
+      </AnchorPane>
+   </Tab>
+   <Tab text="Przestawienie macierzowe słowo">
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+         <VBox layoutX="250.0" layoutY="76.0" prefHeight="371.2" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TextArea fx:id="pmsInput" prefHeight="130.0" prefWidth="579.0" promptText="Tekst jawny">
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </TextArea>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+               <TextField fx:id="pmsDepth" onKeyTyped="#onParamsChangedPms" promptText="Głębokość (np. 4)" />
+               <TextField fx:id="pmsKey" onKeyTyped="#onParamsChangedPms" promptText="Klucz jako słowo" />
+               <Button fx:id="pmsEncode" mnemonicParsing="false" onAction="#pmsEncodeClick" text="Szyfruj" />
+               <Button fx:id="pmsDecode" mnemonicParsing="false" onAction="#pmsDecodeClick" text="Deszyfruj" />
+            </HBox>
+            <Separator prefWidth="200.0" />
+            <Label fx:id="pmsOutput" alignment="TOP_CENTER" minHeight="120.0" minWidth="580.0" onMouseClicked="#onClickLabelPms" text="Wynik">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+         </VBox>
+      </AnchorPane>
+   </Tab>
 </TabPane>

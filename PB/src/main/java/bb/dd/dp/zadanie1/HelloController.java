@@ -7,8 +7,6 @@ import bb.dd.dp.impl2.LSFRImpl;
 import bb.dd.dp.impl2.SynchronousStreamCipherEncryptor;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.util.Duration;
 
 import java.math.BigInteger;
@@ -279,31 +277,24 @@ public class HelloController {
     // Obsługa copiowania z lable
     @FXML
     public void onClickLabelRf() {
-        toClipboard(rfOutput.getText());
+        ControllerUtil.toClipboard(rfOutput.getText());
     }
     
     @FXML
     public void onClickLabelPm() {
-        toClipboard(pmOutput.getText());
+        ControllerUtil.toClipboard(pmOutput.getText());
     }
     
     @FXML
     public void onClickLabelPms() {
-        toClipboard(pmsOutput.getText());
+        ControllerUtil.toClipboard(pmsOutput.getText());
     }
 
     @FXML
     public void onClickLabelScc() {
-        toClipboard(sccOutput.getText());
+        ControllerUtil.toClipboard(sccOutput.getText());
     }
     
-    public void toClipboard(String clip) {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent content = new ClipboardContent();
-        content.putString(clip);
-        clipboard.setContent(content);
-    }
-
     //Zadanie 2
     //FIXME Brak generowania seed. Dla podanego seed'a wynik jest błędny
     @FXML
