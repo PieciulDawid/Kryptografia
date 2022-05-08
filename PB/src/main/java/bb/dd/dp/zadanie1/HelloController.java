@@ -20,12 +20,15 @@ public class HelloController {
 
     @FXML
     void initialize() {
-        final Tooltip tooltip = new Tooltip();
-        tooltip.setText("Click to copy!");
+        final Tooltip tooltip = new Tooltip("Click to copy!");
         tooltip.setShowDelay(new Duration(250));
         rfOutput.setTooltip(tooltip);
         pmOutput.setTooltip(tooltip);
         pmsOutput.setTooltip(tooltip);
+        sccOutput.setTooltip(tooltip);
+        sccPolyOutput.setTooltip(tooltip);
+        lsfrOutput.setTooltip(tooltip);
+
     }
 
 
@@ -296,7 +299,6 @@ public class HelloController {
     }
     
     //Zadanie 2
-    //FIXME Brak generowania seed. Dla podanego seed'a wynik jest błędny
     @FXML
     public void onClickNewSeed(){
         // towrzenie wielomianu do wyświetlania

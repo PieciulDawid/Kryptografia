@@ -6,9 +6,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
 
 public class RsaController {
+
+	@FXML
+	void initialize() {
+		final Tooltip tooltip = new Tooltip("Click to copy!");
+		tooltip.setShowDelay(new Duration(250));
+		output.setTooltip(tooltip);
+	}
 	@FXML
 	private TextArea input;
 	
